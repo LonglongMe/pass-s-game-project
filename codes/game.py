@@ -6,12 +6,12 @@ screen_height=600
 clock = pygame.time.Clock()
 running = True
 
-bg=pygame.image.load("/grass.png")
+bg=pygame.image.load("./img/grass.png")
 class Player:
     def __init__(self,top,left):
         self.images={
-            'R':pygame.image.load('/player.png'),
-            'L':pygame.image.load('/playerl.png'),      
+            'R':pygame.image.load('./img/player.png'),
+            'L':pygame.image.load('./img/playerl.png'),      
         }
         self.speed=3
         self.image_direction='R'
