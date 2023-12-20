@@ -6,14 +6,15 @@ screen_height=600
 clock = pygame.time.Clock()
 running = True
 
-bg=pygame.image.load('.\grass.png')
+
+bg=pygame.image.load('./codes/img/grass.png')
 class Player:
     def __init__(self,top,left):
         self.images={
-            'R':pygame.image.load('.\player.png'),
-            'L':pygame.image.load('.\playerl.png'),      
+            'R':pygame.image.load('./codes/img/player.png'),
+            'L':pygame.image.load('./codes/img/playerl.png'),      
         }
-        self.speed=3
+        self.speed=2
         self.image_direction='R'
         self.image=self.images.get(self.image_direction)
         self.player_rect=self.image.get_rect()
@@ -22,13 +23,17 @@ class Player:
     def move(self):
 
         if self.direction=='R':
-            self.player_rect.x+=self.speed
+            if self.player_rect.x+self.speed<screen_width-50:
+                self.player_rect.x+=self.speed
         if self.direction=='L':
-            self.player_rect.x-=self.speed
+            if self.player_rect.x-self.speed>0:
+                self.player_rect.x-=self.speed
         if self.direction=='U':
-            self.player_rect.y-=self.speed
+            if self.player_rect.y-self.speed>0:
+                self.player_rect.y-=self.speed
         if self.direction=='D':
-            self.player_rect.y+=self.speed
+            if self.player_rect.y+self.speed<screen_height-50:
+                self.player_rect.y+=self.speed
     def display_player(self):
         self.image=self.images.get(self.image_direction)
         self.image=pygame.transform.scale(self.image,(50,50))
@@ -65,15 +70,19 @@ class MainGame:
 
             
         if keys[pygame.K_w]:
-            MainGame.player.player_rect.y-=MainGame.player.speed
+            if MainGame.player.player_rect.y-MainGame.player.speed>0:
+                MainGame.player.player_rect.y-=MainGame.player.speed
         if keys[pygame.K_s]:
-            MainGame.player.player_rect.y+=MainGame.player.speed
+            if MainGame.player.player_rect.y+MainGame.player.speed<screen_height-50:
+                MainGame.player.player_rect.y+=MainGame.player.speed
         if keys[pygame.K_a]:
-            MainGame.player.player_rect.x-=MainGame.player.speed
-            MainGame.player.image_direction='L'
+            if MainGame.player.player_rect.x-MainGame.player.speed>0:
+                MainGame.player.player_rect.x-=MainGame.player.speed
+                MainGame.player.image_direction='L'
         if keys[pygame.K_d]:
-            MainGame.player.player_rect.x+=MainGame.player.speed
-            MainGame.player.image_direction='R'
+            if MainGame.player.player_rect.x+MainGame.player.speed<screen_width-50:
+                MainGame.player.player_rect.x+=MainGame.player.speed
+                MainGame.player.image_direction='R'
 
 
 
